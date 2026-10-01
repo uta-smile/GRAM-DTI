@@ -33,3 +33,41 @@ GRAM-DTI/
 ├── README.md
 └── requirements.txt    # Dependencies
 ```
+
+## 💾 Data
+
+The pre-training and downstream data are hosted on Hugging Face: [FengJiang02/GRAM-DTI](https://huggingface.co/datasets/FengJiang02/GRAM-DTI). The dataset card there describes every file and field.
+
+| Path | Size | Description |
+|---|---|---|
+| `embeddings/embeddings.h5` | 256 MB | Pre-computed embeddings for the four modalities (50,968 molecule–protein pairs) |
+| `embeddings/metadata.json` | 168 MB | Raw text and IC50 labels for the same pairs, in the same row order |
+| `cleaned_pretrain_after_rdk.json` | 146 MB | Source records the embeddings were computed from |
+| `downstream/` | 65 MB | Yamanishi_08, Hetionet, and the activation and inhibition MoA datasets, with `make_splits.py` |
+
+### Pre-training data
+
+Download it into `pretrain_data/`, the default `--embedding_dir` of `pretraining/run.py`:
+
+```bash
+hf download FengJiang02/GRAM-DTI --repo-type dataset \
+  --include "embeddings/*" "cleaned_pretrain_after_rdk.json" --local-dir pretrain_data
+```
+
+### Downstream data
+
+Download the four datasets into `data/`:
+
+```bash
+hf download FengJiang02/GRAM-DTI --repo-type dataset --include "downstream/*" --local-dir .
+mv downstream data
+```
+
+Then generate the cross-validation folds for the warm-start, drug cold-start and protein cold-start settings:
+
+```bash
+python data/make_splits.py data/yamanishi_08 data/Hetionet
+python data/make_splits.py data/activation data/inhibition --n_splits 5
+```
+
+The folds are written to `data/<dataset>/data_folds/<setting>/` and take about 15 GB in total.
