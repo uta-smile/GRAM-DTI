@@ -1,9 +1,10 @@
 # GRAM-DTI: Adaptive Multimodal Representation Learning for Drug-Target Interaction Prediction
 
 [![Venue: ICLR 2026](https://img.shields.io/badge/Venue-ICLR%202026-blue.svg)](https://iclr.cc/)
+[![arXiv](https://img.shields.io/badge/arXiv-2509.21971-b31b1b.svg)](https://arxiv.org/abs/2509.21971)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-This repository contains the official PyTorch implementation of the ICLR 2026 paper: **"GRAM-DTI: Adaptive Multimodal Representation Learning for Drug-Target Interaction Prediction"**.
+This repository contains the official PyTorch implementation of the ICLR 2026 paper: **"GRAM-DTI: Adaptive Multimodal Representation Learning for Drug-Target Interaction Prediction"** ([arXiv:2509.21971](https://arxiv.org/abs/2509.21971)).
 
 ## 📖 Overview
 
@@ -71,3 +72,16 @@ python data/make_splits.py data/activation data/inhibition --n_splits 5
 ```
 
 The folds are written to `data/<dataset>/data_folds/<setting>/` and take about 15 GB in total.
+
+## 📝 Citation
+
+If you find this work useful, please cite:
+
+```bibtex
+@article{jiang2025gramdti,
+  title={GRAM-DTI: adaptive multimodal representation learning for drug target interaction prediction},
+  author={Jiang, Feng and Mollaysa, Amina and Ma, Hehuan and Mansi, Tommaso and Huang, Junzhou and Prakash, Mangal and Liao, Rui},
+  journal={arXiv preprint arXiv:2509.21971},
+  year={2025}
+}
+```
